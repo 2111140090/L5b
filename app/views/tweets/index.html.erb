@@ -1,0 +1,8 @@
+<%=link_to 'ツイートする', new_tweet_path, data: { method: :get } %>
+
+<% @tweets.each do |e| %>
+  <p>
+      <%= e.message %>
+      <%=link_to '削除', tweet_path(e), data: { turbo_method: :delete } %>
+  </p>
+<% end %>
