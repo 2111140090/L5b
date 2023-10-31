@@ -10,10 +10,12 @@ class UsersController < ApplicationController
     end
     
     def create
-        pass = params[:user][:pass]
-        hashpass = BCrypt::Password.create(pass)
-        @user = User.new(uid: params[:user][:uid], pass: hashpass)
-        @user.save
+        if User.find_by(uid: params[:uid])
+            pass = params[:user][:pass]
+            hashpass = BCrypt::Password.create(pass)
+            @user = User.new(uid: params[:user][:uid], pass: hashpass)
+            @user.save
+        end
         redirect_to root_path
     end
     
