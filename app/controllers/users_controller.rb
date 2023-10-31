@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class UsersController < ApplicationController
     def index
         @users = User.all
@@ -8,7 +10,9 @@ class UsersController < ApplicationController
     end
     
     def create
-        @user = User.new(uid: params[:user][:uid], pass: params[:user][:pass])
+        pass = params[:user][:pass]
+        hashpass = BCrypt::Password.create(pass)
+        @user = User.new(uid: params[:user][:uid], pass: hashpass)
         @user.save
         redirect_to root_path
     end

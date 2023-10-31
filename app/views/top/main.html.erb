@@ -1,0 +1,7 @@
+<%#=link_to 'ツイート一覧', controller: "tweets", action: "index" %><br>
+<%=link_to 'ユーザ一覧', controller: "users", action: "index" %><br>
+
+<%= link_to "ログイン", top_login_form_path, method: :post %><br>
+<%= link_to "ログアウト", action: "logout", method: :post %>
+
+<%= link_to "ログインチェック", action: "login_check", method: :post %>

@@ -5,8 +5,14 @@ Rails.application.routes.draw do
   # root "articles#index"
   
   resources :users
-  root "users#index"
+  root "tweets#index"
   resources :tweets
   post 'top/login'
   get 'top/logout'
+  post 'top/logout'
+  get 'top/main'
+  get 'top/login_form'
+  post "likes/create"
+  get "likes/destroy"
+  get "top/login_check"
 end
