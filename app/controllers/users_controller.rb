@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     end
     
     def create
-        if User.find_by(uid: params[:uid])
+        if not User.find_by(uid: params[:user][:uid])
             pass = params[:user][:pass]
             hashpass = BCrypt::Password.create(pass)
             @user = User.new(uid: params[:user][:uid], pass: hashpass)
