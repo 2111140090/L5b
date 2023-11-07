@@ -5,17 +5,21 @@
 <% @tweets.each do |e| %>
   <p>
       <%= e.message %>
-      <%=link_to '削除', tweet_path(e), data: { turbo_method: :delete } %>
-      <% if session[:login_uid] != nil %>
+      <% session[:login_uid] != nil %>
+        <%=link_to '削除', tweet_path(e), data: { turbo_method: :delete } %>
         <%= link_to 'いいね', likes_create_path(tweet_id: e.id), data: {turbo_method: :post} %>
         <%= link_to 'いいね削除', likes_destroy_path(e), method: :delete %>
+        <% end %>
       <% end %>
   </p>
 <% end %>
 
 <%=link_to 'ユーザ一覧', controller: "users", action: "index" %><br>
-<%= link_to "ログイン", controller: "top",  action: "main", method: :post %><br>
-<%= link_to "ログアウト", controller: "top",  action: "logout", method: :post %><br><br><br>
+<% if session[:login_uid] == nil %>
+  <%= link_to "ログイン", controller: "top",  action: "main", method: :post %><br>
+<% else %>
+  <%= link_to "ログアウト", controller: "top",  action: "logout", method: :post %><br><br><br>
+<% end %>
 
 <%= session[:login_uid] %>
 <p>でログイン中</p>

@@ -10,13 +10,22 @@ class UsersController < ApplicationController
     end
     
     def create
-        if not User.find_by(uid: params[:user][:uid])
-            pass = params[:user][:pass]
-            hashpass = BCrypt::Password.create(pass)
-            @user = User.new(uid: params[:user][:uid], pass: hashpass)
-            @user.save
+        #if not User.find_by(uid: params[:user][:uid])
+        #    pass = params[:user][:pass]
+        #    hashpass = BCrypt::Password.create(pass)
+        #    @user = User.new(uid: params[:user][:uid], pass: hashpass)
+        #    @user.save
+        #end
+        #redirect_to root_path
+        @user = User.new(
+            uid: params[:user][:uid],
+            password: params[:user][:password],
+            password_confirmation: params[:user][:password_confirmation])
+        if @user.save
+            redirect_to users_path
+        else
+            render 'new'
         end
-        redirect_to root_path
     end
     
     def destroy

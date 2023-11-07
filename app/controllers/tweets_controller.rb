@@ -7,9 +7,6 @@ class TweetsController < ApplicationController
       @tweet = Tweet.new
     end
     
-    def current_user
-        @current_user ||= User.find_by(uid: session[:login_uid])
-    end
     
     def create
       @tweet = Tweet.create(message: params[:tweet][:message])
