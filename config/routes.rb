@@ -14,5 +14,5 @@ Rails.application.routes.draw do
   get 'top/login_form'
   post "likes/create"
   get "likes/destroy"
-  get "top/login_check"
+  resources :likes, only: [:create, :destroy]
 end
